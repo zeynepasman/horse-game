@@ -1,0 +1,68 @@
+@use "variables.scss" as *;
+@use "shared.scss" as *;
+// Mixins
+@mixin btn {
+  background: $primary;
+  color: $light;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 16px;
+  font-weight: 600;
+  cursor: pointer;
+}
+@mixin table {
+  .table-container {
+    @extend .mb-3;
+    @extend .scroll-y;
+    @extend .border;
+  }
+
+  .table {
+    @extend .border;
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  th,
+  td {
+    @extend .p-2;
+    @extend .border;
+  }
+
+  th {
+    background: $light;
+    @extend .text-left;
+  }
+}
+
+
+
+// Borders
+@mixin border($color: $border-color, $radius: 0) {
+  border: 1px solid $color;
+  border-radius: $radius;
+}
+
+// Heights
+$panel-height: 700px;
+$list-height: 300px;
+// Buttons
+@mixin button-base {
+  margin: $spacing-md;
+  padding: $spacing-md $spacing-xl;
+  @extend .fs-4;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+@mixin button-disabled {
+  background-color: $button-disabled-bg;
+  cursor: not-allowed;
+  border: 1px solid $button-disabled-border;
+}
+@mixin dashed-border($color, $width: 3px) {
+  border: $width dashed $color;
+}
+@mixin dashed-border-bottom($color, $width: 3px) {
+  border-bottom: $width dashed $color;
+}

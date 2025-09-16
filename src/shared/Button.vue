@@ -12,7 +12,7 @@ defineProps<{
 </script>
 
 <style scoped lang="scss">
-@use "./shared.scss" as *;
+@use "@styles/mixins.scss" as *;
 .shared-btn {
   @include btn;
 }

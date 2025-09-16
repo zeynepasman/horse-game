@@ -6,5 +6,9 @@ export interface Horse {
   color: string;
   condition: number;
   progress: number;
+  position?: number;
 }
 
+export interface HorsesModuleState {
+  horses: Horse[];
+}

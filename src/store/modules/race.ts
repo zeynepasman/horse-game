@@ -1,50 +1,50 @@
 import { Module } from "vuex";
-import { RaceState } from "../../types/states/raceState";
-import { Horse } from "../../types/models/horse.model";
+import { Horse } from "@models/horse.model";
+import { RaceState } from "@models/race.model";
+import { RootState } from "@store/index";
 
 const roundDistances = [1200, 1400, 1600, 1800, 2000, 2200];
 
-const race: Module<any, any> = {
+const race: Module<RaceState, RootState> = {
   namespaced: true,
   state: () => ({
-    horses: [],
     rounds: [],
     currentRound: 0, 
     raceStarted: false,
     results: [],
   }),
   mutations: {
-    generateRounds(state, selectedHorses: Horse[]) {
+    generateRounds(state: RaceState, selectedHorses: Horse[]) {
       state.rounds = roundDistances.map((distance, index) => ({
         roundIndex: index + 1,
         distance,
-        horses: selectedHorses.map((h) => ({ ...h, progress: 0 })), // reset progress each round
+        horses: selectedHorses.map((horse: Horse) => ({ ...horse, progress: 0 })), // reset progress each round
         results: null,
       }));
       state.currentRound = 0;
     },
-    setRaceStarted(state, started: boolean) {
+    setRaceStarted(state: RaceState, started: boolean) {
       state.raceStarted = started;
     },
-    setCurrentRound(state, round: number) {
+    setCurrentRound(state: RaceState, round: number) {
       state.currentRound = round;
     },
-    clearResults(state) {
+    clearResults(state: RaceState) {
       state.results = []; // Reset the results array
     },
     saveRoundResults(
-      state,
+      state: RaceState,
       { roundIndex, placements }: { roundIndex: number; placements: Horse[] }
     ) {
       state.results.push({ roundIndex, placements });
     },
-    resetProgress(state, roundIndex: number) {
-      state.rounds[roundIndex].horses.forEach((h: Horse) => (h.progress = 0));
+    resetProgress(state: RaceState, roundIndex: number) {
+      state.rounds[roundIndex].horses.forEach((horse: Horse) => (horse.progress = 0));
     },
   },
   actions: {
     startProgram({ commit, rootGetters }) {
-      const horses: Horse[] = rootGetters["horses/allHorses"];
+      const horses: Horse[] = rootGetters["horse/allHorses"];
       if (!horses || horses.length === 0) return;
 
       const shuffled = [...horses].sort(() => 0.5 - Math.random());
@@ -78,12 +78,13 @@ const race: Module<any, any> = {
         const placements = [...round.horses].sort(
           (a, b) => b.progress - a.progress
         );
+        console.log("Round finished. Placements:", placements);
         commit("saveRoundResults", {
           roundIndex: round.roundIndex,
           placements,
         });
       }
-      if (round.horses.every((h: Horse) => h.progress >= 100)) {
+      if (round.horses.every((horse: Horse) => horse.progress >= 100)) {
         commit("setRaceStarted", false);
       }
     },

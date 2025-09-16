@@ -1,4 +1,4 @@
-import { Horse } from "../types/models/horse.model";
+import { Horse } from "@models/horse.model";
 
 export const HORSE_COUNT = 20;
 

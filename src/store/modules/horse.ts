@@ -1,16 +1,13 @@
-// store/modules/horses.ts
 import type { Module } from "vuex";
-import { HorsesModuleState } from "../../types/states/horseState";
-import { generateHorses } from "../../utils/horse-utils";
-import { Horse } from "../../types/models/horse.model";
+import { generateHorses } from "@utils/horse-utils";
+import { Horse, HorsesModuleState } from "@models/horse.model";
+import { RootState } from "@store/index";
 
-const horsesModule: Module<HorsesModuleState, any> = {
+const horsesModule: Module<HorsesModuleState, RootState> = {
   namespaced: true,
 
   state: (): HorsesModuleState => ({
     horses: generateHorses(),
-    allHorses: [],
-    initHorses: () => {},
   }),
 
   getters: {

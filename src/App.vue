@@ -30,12 +30,13 @@
 <script setup lang="ts">
 import { onUnmounted, ref } from "vue";
 import { useStore } from "vuex";
-import HorseList from "./components/Horse/HorseList.vue";
-import RaceTrack from "./components/Race/RaceTrack.vue";
-import RaceOverview from "./components/Race/RaceOverview.vue";
-import { RaceState } from "./types";
+import HorseList from "@components/Horse/HorseList.vue";
+import RaceTrack from "@components/Race/RaceTrack.vue";
+import RaceOverview from "@components/Race/RaceOverview.vue";
+import Button from "@shared/Button.vue"; // Added import for Button
+import { RootState } from "@store/index";
 
-const store = useStore<RaceState>();
+const store = useStore<RootState>();
 const currentRoundIndex = ref<number>(0);
 const simulationInProgress = ref<boolean>(false);
 let intervalId: ReturnType<typeof setInterval> | null = null;
@@ -99,60 +100,42 @@ const generateProgram = (): void => {
 };
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+@use "@styles/shared.scss" as *;
+@use "@styles/variables.scss" as *;
+@use "@styles/mixins.scss" as *;
 .layout {
   display: grid;
   grid-template-columns: 1fr 2fr 1fr;
-  gap: 15px;
-  /* Adjusted gap for consistency */
-  margin-top: 25px;
-  /* Slightly increased margin */
+  gap: $spacing-lg;
+  @extend .mt-4;
 }
 
 .left {
-  border: 1px solid #ccc;
-  /* Softer border color */
-  padding: 15px;
-  /* Increased padding */
-  background: #fff8dc;
-  /* Light golden background */
+  @include border($border-color);
+  @extend .p-4;
+  @extend .scroll-y;
+  height: $panel-height;
 }
 
 .right {
-  border: 1px solid #ccc;
-  padding: 15px;
-  background: #f0fff0;
-  /* Light mint green background */
+  @include border($border-color);
+  @extend .p-4;
+  @extend .scroll-y;
+  height: $panel-height;
 }
 
 h1 {
-  text-align: center;
-  color: #b22222;
-  /* Firebrick red for title */
-  font-size: 28px;
-  /* Larger font size for title */
+  @extend .text-center;
+  color: $title-color;
+  @extend .fs-6;
 }
 
-Button {
-  margin: 12px;
-  background-color: #ffd700;
-  /* Gold button background */
-  border: 1px solid #b8860b;
-  /* Dark golden border */
-  padding: 12px 25px;
-  /* Adjusted padding */
-  font-size: 18px;
-  /* Larger font size */
-  cursor: pointer;
-  border-radius: 5px;
-  /* Rounded corners */
+button {
+  @include button-base;
 }
 
-Button:disabled {
-  background-color: #dcdcdc;
-  /* Light gray background for disabled buttons */
-  cursor: not-allowed;
-  border: 1px solid #a9a9a9;
-  /* Darker gray border for disabled buttons */
+button:disabled {
+  @include button-disabled;
 }
 </style>

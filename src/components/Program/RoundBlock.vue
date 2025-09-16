@@ -6,14 +6,14 @@
 </template>
 
 <script setup lang="ts">
-import { Round } from "@/types";
-import ProgramHorse from "./ProgramHorse.vue";
+import { Round } from "@models/race.model";
+import ProgramHorse from "@components/Program/ProgramHorse.vue";
 
 defineProps<{ round: Round }>();
 </script>
 
 <style scoped lang="scss">
-@use "@/shared/shared.scss" as *;
+@use "@styles/shared.scss" as *;
 
 .round-block {
   @extend .mb-3;

@@ -12,35 +12,44 @@
       </div>
     </div>
   </div>
+  <h3 class="round-info">Round {{ currentRound + 1 }}</h3>
 </template>
 
 <script setup lang="ts">
 import { computed } from "vue";
 import { useStore } from "vuex";
-import { Horse } from "../../types/models/horse.model";
+import { Horse } from "@models/horse.model";
+import { RootState } from "@store/index";
 
-const store = useStore();
+const store = useStore<RootState>();
 const horses = computed<Horse[]>(() => store.getters["race/raceHorses"]);
+const currentRound = computed<number>(() => store.state.race.currentRound); 
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+@use "@styles/mixins.scss" as *;
+@use "@styles/variables.scss" as *;
+@use "@styles/shared.scss" as *;
+
 .track {
   position: relative;
   width: 100%;
-  height: 400px;
-  border: 3px dashed #ff4500; /* Dashed orange border for race track */
-  background: #f5f5f5; /* Slightly darker gray background */
-  position: relative;
+  height: $panel-height;
+  @include dashed-border($primary);
+  background: $light-bg;
+}
+
+.round-info {
+  @extend .text-center;
+  font-weight: bold;
+  color: $dark;
+  @extend .mb-3;
 }
 
 .lane {
   position: relative;
-  height: 10%;
-  border-bottom: 1px dashed #87ceeb; /* Sky blue dashed line */
-}
-
-.lane:last-child {
-  border-bottom: none; /* Remove border for the last lane */
+  height: 9%;
+  @include dashed-border-bottom($primary);
 }
 
 .horse {
@@ -48,21 +57,16 @@ const horses = computed<Horse[]>(() => store.getters["race/raceHorses"]);
   top: 50%;
   transform: translateY(-50%);
   transition: left 0.1s linear;
-  padding: 4px 8px; /* Adjusted padding */
-  border-radius: 6px; /* Slightly more rounded */
-  font-size: 20px; /* Larger font size */
-  background: #ffebcd; /* Blanched almond background */
-  border: 1px solid #cd853f; /* Peru border */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Subtle shadow for horses */
+  @extend .p-2;
+  @extend .border-radius-md;
+  @include border($dark);
 }
 
 .track::after {
   content: "FINISH LINE";
   position: absolute;
-  right: 15px;
-  bottom: 15px;
-  font-size: 20px; /* Slightly larger font */
-  font-weight: bold;
-  color: #ff4500; /* Orange text for finish line */
+  right: $spacing-md;
+  bottom: $spacing-md;
+  color: $danger;
 }
 </style>

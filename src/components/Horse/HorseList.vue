@@ -6,7 +6,7 @@
         :headers="['id', 'name', 'condition', 'color']"
         :rows="horses"
         idKey="id"
-      />
+      ></Table>
     </div>
   </div>
 </template>
@@ -14,18 +14,19 @@
 <script setup lang="ts">
 import { computed, onMounted } from "vue";
 import { useStore } from "vuex";
-import { Horse } from "../../types/models/horse.model";
-import Table from "../../shared/Table.vue";
-const store = useStore();
+import { Horse } from "@models/horse.model";
+import Table from "@shared/Table.vue";
+import { RootState } from "@store/index";
+const store = useStore<RootState>();
 
 onMounted(() => {
-  if (!store.getters["horses/allHorses"]?.length) {
-    store.dispatch("horses/initHorses");
+  if (!store.getters["horse/allHorses"]?.length) {
+    store.dispatch("horse/initHorses");
   }
 });
 
 const horses = computed<Horse[]>(
-  () => store.getters["horses/allHorses"] as Horse[]
+  () => store.getters["horse/allHorses"] as Horse[]
 );
 </script>
 

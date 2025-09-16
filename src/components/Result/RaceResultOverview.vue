@@ -11,17 +11,20 @@
 <script setup lang="ts">
 import { computed } from "vue";
 import { useStore } from "vuex";
-import RaceResultList from "./RaceResultList.vue"; 
+import RaceResultList from "@components/Result/RaceResultList.vue";
+import { RaceResult } from "@models/race.model";
+import { RootState } from "@store/index";
 
-const store = useStore();
-const results = computed(() => store.getters["race/results"]);
+const store = useStore<RootState>();
+const results = computed(() => store.getters["race/results"] as RaceResult[]);
 </script>
 <style scoped lang="scss">
-
+@use "@styles/shared.scss" as *;
+@use "@styles/variables.scss" as *;
 .results {
-  margin-top: 18px;
+  @extend .mt-4;
 }
 .round-results {
-  margin-bottom: 16px;
+  @extend .mb-4;
 }
 </style>

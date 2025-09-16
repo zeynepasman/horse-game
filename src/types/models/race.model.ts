@@ -1,20 +1,21 @@
 import { Horse } from "./horse.model";
 
+
 export interface Round {
   roundIndex: number;
   distance: number;
   horses: Horse[];
-  results: Result | null; 
+  results: RaceResult | null;
 }
 
-export interface Result {
+export interface RaceResult {
   roundIndex: number;
   placements: Horse[];
 }
 
 export interface RaceState {
   rounds: Round[];
-  currentRound: number;
+  currentRound: number; // Ensure this property exists
   raceStarted: boolean;
-  results: Result[]; 
+  results: RaceResult[];
 }

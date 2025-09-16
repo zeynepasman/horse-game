@@ -1,13 +1,13 @@
 <template>
-  <div class="table-container">
-    <table>
+  <div class="table-container scrollable">
+    <table class="table">
       <thead>
         <tr>
           <th v-for="header in headers" :key="header">{{ header.toUpperCase() }}</th>
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(row, index) in rows" :key="row[idKey]">
+        <tr v-for="(row, index) in rows" :key="index">
           <td v-for="header in headers" :key="header">{{ row[header] }}</td>
         </tr>
       </tbody>
@@ -17,34 +17,36 @@
 
 <script setup lang="ts">
 import { defineProps } from "vue";
+import { TableProps } from "@models/table-model";
+import { Horse } from "@models/horse.model";
 
-const props = defineProps<{
-  headers: string[];
-  rows: Record<string, any>[];
-  idKey?: string;
-}>();
-
-const idKey = props.idKey ?? "id";
+defineProps<TableProps<Horse>>();
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+@use "@styles/shared.scss" as *;
+@use "@styles/variables.scss" as *;
+
 .table-container {
-  margin: 20px 0;
+  @extend .mb-3;
+  @extend .scroll-y; 
+  @extend .border; 
 }
 
-table {
-  border-collapse: collapse;
+.table {
+  @extend .border;
   width: 100%;
+  border-collapse: collapse;
 }
 
 th,
 td {
-  border: 1px solid #ddd;
-  padding: 8px;
+  @extend .p-2;
+  @extend .border;
 }
 
 th {
-  background: #f5f5f5;
-  text-align: left;
+  background: $light;
+  @extend .text-left;
 }
 </style>

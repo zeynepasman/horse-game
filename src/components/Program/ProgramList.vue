@@ -8,11 +8,11 @@
 </template>
 
 <script setup lang="ts">
-import RoundBlock from "./RoundBlock.vue";
-import { Round } from "@/types";
+import RoundBlock from "@components/Program/RoundBlock.vue";
+import { Round } from "@models/race.model";
 defineProps<{ rounds: Round[] }>();
 </script>
 
 <style scoped lang="scss">
-@use "@/shared/shared.scss" as *;
+@use "@styles/variables.scss" as *;
 </style>
