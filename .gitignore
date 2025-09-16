@@ -18,8 +18,7 @@ coverage
 /cypress/screenshots/
 
 # Editor directories and files
-.vscode/*
-!.vscode/extensions.json
+.vscode/           # Ensure the entire .vscode folder is ignored
 .idea
 *.suo
 *.ntvs*
@@ -27,4 +26,5 @@ coverage
 *.sln
 *.sw?
 
+*.tsbuildinfo
 *.tsbuildinfo
