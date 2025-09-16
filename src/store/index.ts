@@ -1,13 +1,13 @@
 import { createStore } from "vuex";
 import race from "./modules/race";
 import { RaceState } from "@models/race.model";
-import { HorsesModuleState } from "@models/horse.model";
+import { HorseModuleState } from "@models/horse.model";
 import horse from "./modules/horse";
 
 
 export interface RootState {
   race: RaceState;
-  horse: HorsesModuleState;
+  horse: HorseModuleState;
 }
 
 export default createStore<RootState>({

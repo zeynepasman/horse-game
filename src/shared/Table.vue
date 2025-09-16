@@ -1,5 +1,5 @@
 <template>
-  <div class="table-container scrollable">
+  <div class="table-responsive">
     <table class="table">
       <thead>
         <tr>
@@ -25,28 +25,19 @@ defineProps<TableProps<Horse>>();
 
 <style scoped lang="scss">
 @use "@styles/shared.scss" as *;
+@use "@styles/mixins.scss" as *;
 @use "@styles/variables.scss" as *;
-
-.table-container {
-  @extend .mb-3;
-  @extend .scroll-y; 
-  @extend .border; 
+.table-responsive {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto; /* Enable horizontal scrolling for small screens */
+  -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+  @include border($border-color);
+  @extend .scroll-y;
 }
 
 .table {
-  @extend .border;
-  width: 100%;
-  border-collapse: collapse;
-}
-
-th,
-td {
-  @extend .p-2;
-  @extend .border;
-}
-
-th {
-  background: $light;
-  @extend .text-left;
+  @include table;
 }
 </style>

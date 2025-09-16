@@ -19,6 +19,5 @@ defineProps<{ horses: Horse[] }>();
 .table {
   @include table;
   height: $list-height;
-  @extend .scroll-y; 
 }
 </style>

@@ -1,12 +1,12 @@
 import type { Module } from "vuex";
 import { generateHorses } from "@utils/horse-utils";
-import { Horse, HorsesModuleState } from "@models/horse.model";
+import { Horse, HorseModuleState } from "@models/horse.model";
 import { RootState } from "@store/index";
 
-const horsesModule: Module<HorsesModuleState, RootState> = {
+const horseModule: Module<HorseModuleState, RootState> = {
   namespaced: true,
 
-  state: (): HorsesModuleState => ({
+  state: (): HorseModuleState => ({
     horses: generateHorses(),
   }),
 
@@ -27,4 +27,4 @@ const horsesModule: Module<HorsesModuleState, RootState> = {
   },
 };
 
-export default horsesModule;
+export default horseModule;

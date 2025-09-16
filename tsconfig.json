@@ -17,7 +17,8 @@
       "@shared/*": ["shared/*"],
       "@utils/*": ["utils/*"],
       "@styles/*": ["styles/*"]
-    }
+    },
+    "types": ["vitest/globals"]
   },
   "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.vue"],
   "exclude": ["node_modules"]

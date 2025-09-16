@@ -9,6 +9,6 @@ export interface Horse {
   position?: number;
 }
 
-export interface HorsesModuleState {
+export interface HorseModuleState {
   horses: Horse[];
 }

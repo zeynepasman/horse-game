@@ -1,9 +1,13 @@
-import { defineConfig } from "vite";
+import { defineConfig } from "vitest/config"; // Use vitest/config instead of vite
 import vue from "@vitejs/plugin-vue";
 import path from "path";
 
 export default defineConfig({
   plugins: [vue()],
+  test: {
+    globals: true,       // allows "describe", "it", "expect" without imports
+    environment: "jsdom" // simulates browser environment
+  },
   resolve: {
     alias: {
       "@types": path.resolve(__dirname, "src/types"),

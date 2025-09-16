@@ -25,3 +25,6 @@ coverage
 *.njsproj
 *.sln
 *.sw?
+
+# Ignore package-lock.json
+package-lock.json
